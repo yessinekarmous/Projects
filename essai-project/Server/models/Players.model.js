@@ -13,6 +13,10 @@ const PlayerSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Birth date is required, please provide it."],
     },
+    PlayerImg: {
+      type: String,
+      required: [true, "A personal photo is required ,please provide it"],
+    },
     Nationality: {
       type: String,
       minLength: [1, "Nationality should have at least 1 character"],
@@ -127,8 +131,46 @@ const PlayerSchema = new mongoose.Schema(
       enum: ["Yes", "No"],
       default: "No",
     },
+
+    Situation: {
+      type: String,
+      enum: ["accepted", "rejected", "pending"],
+      default: "pending",
+    },
+    PlayerStatus: {
+      type: String,
+      enum: ["Free", "Successful"],
+      default: "Free",
+    },
+    // if Situation was Successful
+    DestinationClub: {
+      type: String,
+      default: "",
+    },
+    TransferAmount: {
+      type: String,
+      default: "",
+    },
+    MediaGallery: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
 
+// PlayerSchema.methods.addToAchievements = async function () {
+//   if (this.PlayerStatus === "Successful") {
+//     const Achievements = require("./Achievements.model").Achievements;
+
+//     const achievement = new Achievements({
+//       Player: this._id,
+//       PlayerContractedName: this.Fullname,
+//       PlayerContractedImg: this.PlayerImage,
+//       Show: "Yes",
+//     });
+
+//     await achievement.save();
+//   }
+// };
 module.exports.Players = mongoose.model("Players", PlayerSchema);

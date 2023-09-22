@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 //--The Schema--//
 
 const AchievementsSchema = new mongoose.Schema(
