@@ -127,11 +127,13 @@ const PlayerSchema = new mongoose.Schema(
       enum: ["yes", "no"],
     },
     Show: {
-      type: String,
-      enum: ["Yes", "No"],
-      default: "No",
+      type: Boolean,
+      default: false,
     },
-
+    AgencyContract: {
+      data: Buffer,
+      contentType: String,
+    },
     Situation: {
       type: String,
       enum: ["accepted", "rejected", "pending"],
