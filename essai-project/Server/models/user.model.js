@@ -21,8 +21,13 @@ const UserSchema = new mongoose.Schema(
       minlength: [8, "Password must be 8 characters or longer"],
     },
     role: {
-      type: "String",
+      type: String,
       enum: ["player", "recruter"],
+    },
+    Situation: {
+      type: String,
+      enum: ["accepted", "rejected", "pending"],
+      default: "pending",
     },
   },
   { timestamps: true }

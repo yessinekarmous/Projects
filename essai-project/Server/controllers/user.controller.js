@@ -47,14 +47,27 @@ module.exports = {
         if (isPasswordValid) {
           const userToken = jwt.sign({ id: userFromDB._id }, SECRET);
           console.log("Login User Token: " + userToken, "-------------------");
-          res
-            .status(201)
-            .cookie("userToken", userToken, { httpOnly: true })
-            .json({
-              userFromDB,
-              message: "Login succesful",
-              userToken: userToken,
-            });
+          if (userFromDB.role === "player") {
+            if (userFromDB.Situation === "accepted") {
+              res
+                .status(201)
+                .cookie("userToken", userToken, { httpOnly: true })
+                .json({
+                  userFromDB,
+                  message: "Login succesful",
+                  userToken: userToken,
+                });
+            }
+          } else {
+            res
+              .status(201)
+              .cookie("userToken", userToken, { httpOnly: true })
+              .json({
+                userFromDB,
+                message: "Login succesful",
+                userToken: userToken,
+              });
+          }
         } else {
           res.status(401).json({ message: "Invalid password" });
         }
@@ -91,13 +104,39 @@ module.exports = {
     }
   },
   deleteAllUsers: async (req, res) => {
-    const params = req;
+    const { params } = req;
     try {
       const result = await User.findByIdAndDelete(params.id);
       res.status(200).json({ message: "Deleted successfully" });
     } catch (error) {
       console.error("Error deleting users:", error);
       res.status(500).json({ message: "Server error" });
+    }
+  },
+
+  FindOne: async (req, res) => {
+    const { email } = req.params;
+
+    try {
+      const oneUser = await User.findOne({ email });
+      res.status(200).json(oneUser);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  },
+  Update: async (req, res) => {
+    const { email } = req.params;
+    const { body } = req;
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { email },
+        body,
+        { new: true },
+        { runValidators: true }
+      );
+      res.status(200).json(updatedUser);
+    } catch (err) {
+      res.status(400).json(err);
     }
   },
 };
