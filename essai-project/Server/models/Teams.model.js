@@ -20,13 +20,13 @@ const TeamSchema = new mongoose.Schema(
       required: [true, "Contact phone number is required."],
     },
     DesiredPositions: {
-      type: [String], // Liste des postes recherchés (par exemple: ["GK", "ST", "MF"])
+      type: String,
     },
     Budget: {
-      type: Number, // Budget disponible pour le recrutement
+      type: Number,
     },
     AdditionalInfo: {
-      type: String, // Informations complémentaires sur l'équipe et les besoins
+      type: String,
     },
   },
   { timestamps: true }

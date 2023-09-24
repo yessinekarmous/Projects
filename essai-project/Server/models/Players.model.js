@@ -15,7 +15,7 @@ const PlayerSchema = new mongoose.Schema(
     },
     PlayerImg: {
       type: String,
-      required: [true, "A personal photo is required ,please provide it"],
+      // required: [true, "A personal photo is required ,please provide it"],
     },
     Nationality: {
       type: String,
@@ -79,7 +79,6 @@ const PlayerSchema = new mongoose.Schema(
         "LW",
         "ST",
       ],
-      required: [true, "Position is required, please provide it."],
     },
     PrefferedFoot: {
       type: String,
@@ -119,7 +118,7 @@ const PlayerSchema = new mongoose.Schema(
     },
     PerformanceVideos: {
       type: [String], // Stocker les liens vers les fichiers vidéo téléchargés
-      required: [true, "At least one performance video is required."],
+      // required: [true, "At least one performance video is required."],
     },
     ContractHistory: {
       type: String,
@@ -156,6 +155,10 @@ const PlayerSchema = new mongoose.Schema(
     MediaGallery: {
       type: String,
       default: "",
+    },
+    favourite: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
