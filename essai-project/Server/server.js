@@ -14,7 +14,6 @@ app.use(express.json());
 // Routes
 require("./routes/user.routes")(app);
 
-require("./routes/Achievements.route")(app);
 require("./routes/Players.route")(app);
 require("./routes/Teams.route")(app);
 require("./routes/Sponsors.route")(app);

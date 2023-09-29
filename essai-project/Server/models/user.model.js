@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
     UserName: {
       type: String,
       required: [true, "UserName is required"],
+      maxlength: 3,
     },
     email: {
       type: String,
@@ -28,6 +29,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ["accepted", "rejected", "pending"],
       default: "pending",
+    },
+    Message: {
+      type: String,
+      default: "",
     },
   },
   { timestamps: true }

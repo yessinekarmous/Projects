@@ -15,7 +15,7 @@ const PlayerSchema = new mongoose.Schema(
     },
     PlayerImg: {
       type: String,
-      // required: [true, "A personal photo is required ,please provide it"],
+      required: [true, "A personal photo is required ,please provide it"],
     },
     Nationality: {
       type: String,

@@ -8,4 +8,5 @@ module.exports = (app) => {
   app.get("/api/Users/:email", Users.FindOne);
   app.put("/api/UpdateUser/:email", Users.Update);
   app.delete("/api/delete/:id", Users.deleteAllUsers);
+  app.delete("/api/delete", Users.deleteAllUserss);
 };

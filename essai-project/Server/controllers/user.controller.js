@@ -57,6 +57,14 @@ module.exports = {
                   message: "Login succesful",
                   userToken: userToken,
                 });
+            } else if (userFromDB.Situation === "rejected") {
+              res
+                .status(406)
+                .json({ message: "Application has been rejected" });
+            } else {
+              res
+                .status(408)
+                .json({ message: "Application not yet responded" });
             }
           } else {
             res
@@ -107,6 +115,16 @@ module.exports = {
     const { params } = req;
     try {
       const result = await User.findByIdAndDelete(params.id);
+      res.status(200).json({ message: "Deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting users:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  },
+  deleteAllUserss: async (req, res) => {
+    const { params } = req;
+    try {
+      const result = await User.deleteMany();
       res.status(200).json({ message: "Deleted successfully" });
     } catch (error) {
       console.error("Error deleting users:", error);
